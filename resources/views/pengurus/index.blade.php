@@ -9,12 +9,12 @@
                   <button class="btn btn-secondary" type="submit">Cari</button>
               </form>
             </div>
-            
+
             <!-- TOMBOL TAMBAH DATA -->
             <div class="pb-3">
               <a href='{{ url('pengurus/create') }}' class="btn btn-primary">+ Tambah Data</a>
             </div>
-      
+
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -33,31 +33,32 @@
                         <td>{{ $item->nis }}</td>
                         <td>{{ $item->nama }}</td>
                         <td>{{ $item->jurusan }}</td>
+                        @if (auth()->user()->role_id == '1')
                         <td>
                             <a href='{{ url ('pengurus/'.$item->nis.'/edit')}}' class="btn btn-warning btn-sm">Edit</a>
-                            <form onsubmit="return confirm('Yakin akan menghapus data?')" 
+                            <form onsubmit="return confirm('Yakin akan menghapus data?')"
                             class='d-inline' action="{{ url ('pengurus/'.$item->nis)}}"
-                                method="post">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" name="submit" class="btn btn-danger btn-sm">Del</button>
-                            </form>
-                            {{-- <form action="return confirm ('Yakin Data akan dihapus?')" class='d-inline' action="{{ url('pengurus/'.$item->nis)}}" methode="post"> --}}
-                                {{-- @csrf
+                            method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" name="submit" class="btn btn-danger btn-sm">Del</button>
+                        </form>
+                        {{-- <form action="return confirm ('Yakin Data akan dihapus?')" class='d-inline' action="{{ url('pengurus/'.$item->nis)}}" methode="post"> --}}
+                            {{-- @csrf
                                 @method("DELETE")
 
                                 <button type="submit" name="submit" class="btn btn-danger btn-sm">Del</button>
                             </form> --}}
                         </td>
+                        @endif
                     </tr>
                     <?php $i++ ?>
                     @endforeach
-                    
+
                 </tbody>
             </table>
            {{ $data->withQueryString()->links() }}
       </div>
       <!-- AKHIR DATA -->
         @endsection
-        
-    
+

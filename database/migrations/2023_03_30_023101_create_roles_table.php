@@ -11,15 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pengurus', function (Blueprint $table) {
-            $table->integer('nis');
-            $table->unique('nis');
-            $table->string('nama');
-            $table->string('jurusan');
+        Schema::create('roles', function (Blueprint $table) {
+            $table->id();
+            $table->string('name',50);
+            $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
      */
-    public function down():
+    public function down(): void
+    {
+        Schema::dropIfExists('roles');
+    }
+};
